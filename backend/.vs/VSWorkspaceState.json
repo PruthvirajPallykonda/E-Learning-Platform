@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ELearningPlatform.Api",
+    "\\ELearningPlatform.Api\\Controllers",
+    "\\ELearningPlatform.Api\\DTOs",
+    "\\ELearningPlatform.Api\\Services",
+    "\\ELearningPlatform.Api\\Services\\Interfaces"
+  ],
+  "SelectedNode": "\\ELearningPlatform.Api\\Program.cs",
+  "PreviewInSolutionExplorer": false
+}
