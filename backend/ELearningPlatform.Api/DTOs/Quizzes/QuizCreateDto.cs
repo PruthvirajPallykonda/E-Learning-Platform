@@ -6,6 +6,8 @@
 
         public int CourseId { get; set; }
 
+        public List<int> CourseIds { get; set; } = new();
+
         public List<QuestionCreateDto> Questions { get; set; } = new();
     }
 }

@@ -27,3 +27,7 @@ export const enrollCourseApi = (courseId) => {
 export const getMyCoursesApi = () => {
     return axiosClient.get("/enrollments/my-courses");
 }
+
+export const getMyInstructorCoursesApi = () => {
+    return axiosClient.get("/Courses/my-courses");
+};

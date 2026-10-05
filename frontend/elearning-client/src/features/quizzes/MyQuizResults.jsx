@@ -1,22 +1,18 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchMyQuizResults } from "./quizSlice";
+import { useSelector } from "react-redux";
 
-function MyQuizResults() {
-  const dispatch = useDispatch();
+function MyQuizResults({ courseId }) {
   const { myResults } = useSelector((state) => state.quizzes);
-
-  useEffect(() => {
-    dispatch(fetchMyQuizResults());
-  }, [dispatch]);
+  const courseResults = myResults.filter(
+    (result) => Number(result.courseId) === Number(courseId)
+  );
 
   return (
     <div className="mt-4">
       <h4>My Quiz Results</h4>
 
-      {myResults.length === 0 && <p>No quiz results yet.</p>}
+      {courseResults.length === 0 && <p>No quiz results for this course yet.</p>}
 
-      {myResults.map((result) => (
+      {courseResults.map((result) => (
         <div className="border rounded p-3 mb-2" key={result.quizResultId}>
           <h6>{result.quizTitle}</h6>
           <p>

@@ -2,6 +2,7 @@
 import { useDispatch } from "react-redux"
 import { createCourse } from "./courseSlice"
 import { useNavigate } from 'react-router-dom'
+import BackButton from '../../components/BackButton'
 
 function CreateCourse() {
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function CreateCourse() {
         thumbnailUrl: "",
         categoryId: 1,
     });
+    const [message, setMessage] = useState("");
 
     const handleChange = (e) => {
         setForm({
@@ -23,16 +25,35 @@ function CreateCourse() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setMessage("");
+
+        if (!form.title.trim() || !form.description.trim()) {
+            setMessage("Course title and description are required.");
+            return;
+        }
+
+        if (form.price === "" || Number(form.price) < 0) {
+            setMessage("Enter a valid course price.");
+            return;
+        }
 
         const result = await dispatch(createCourse(form));
 
         if (createCourse.fulfilled.match(result)) {
-            navigate("/instructor/dashboard");
+            navigate("/instructor/dashboard", {
+            state: {
+                message: "Course created successfully."
+            }
+        });
+        } else {
+            setMessage(result.payload || result.error?.message || "Failed to create course.");
         }
     };
   return (
     <div className='container mt-4'>
+        <BackButton fallback="/instructor/dashboard" />
         <h2>Create Course</h2>
+        {message && <div className='alert alert-danger'>{message}</div>}
 
         <form onSubmit={handleSubmit}>
             <input 

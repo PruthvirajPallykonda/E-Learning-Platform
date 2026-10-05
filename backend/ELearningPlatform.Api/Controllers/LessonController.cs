@@ -79,11 +79,26 @@ namespace ELearningPlatform.Api.Controllers
             return Ok(lesson);
         }
 
-        [Authorize(Roles = "Instructor")]
+        [Authorize(Roles = "Instructor,Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateLesson(LessonCreateDto request)
         {
             var instructorId = GetCurrentUserId();
+
+            if (string.IsNullOrWhiteSpace(request.Title))
+            {
+                return BadRequest("Lesson title is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.VideoUrl))
+            {
+                return BadRequest("Lesson video URL is required.");
+            }
+
+            if (request.OrderNumber < 1)
+            {
+                return BadRequest("Lesson order number must be at least 1.");
+            }
 
             var course = await _context.Courses
                 .FirstOrDefaultAsync(c => c.Id == request.CourseId);
@@ -93,7 +108,7 @@ namespace ELearningPlatform.Api.Controllers
                 return NotFound("Course not found");
             }
 
-            if (course.InstructorId != instructorId)
+            if (!User.IsInRole("Admin") && course.InstructorId != instructorId)
             {
                 return Forbid();
             }
@@ -128,7 +143,7 @@ namespace ELearningPlatform.Api.Controllers
             });
         }
 
-        [Authorize(Roles = "Instructor")]
+        [Authorize(Roles = "Instructor,Admin")]
         [HttpPut("{lessonId}")]
 
         public async Task<IActionResult> UpdateLesson(int lessonId, LessonUpdateDto request)
@@ -144,17 +159,17 @@ namespace ELearningPlatform.Api.Controllers
                 return NotFound("Lesson not found");
             }
 
-            if (lesson.Course!.InstructorId != instructorId)
+            if (!User.IsInRole("Admin") && lesson.Course!.InstructorId != instructorId)
             {
                 return Forbid();
             }
 
             var orderExits = await _context.Lessons
-                .AnyAsync(l => l.CourseId == lesson.CourseId && 
-                                l.OrderNumber == lesson.OrderNumber &&
-                                l.Id != lessonId);
+                    .AnyAsync(l => l.CourseId == lesson.CourseId &&
+                    l.OrderNumber == request.OrderNumber &&
+                    l.Id != lessonId);
 
-            if(orderExits)
+            if (orderExits)
             {
                 return BadRequest("Lesson order number already exits for this course.");
             }
@@ -169,7 +184,7 @@ namespace ELearningPlatform.Api.Controllers
 
         }
 
-        [Authorize(Roles = "Instructor")]
+        [Authorize(Roles = "Instructor,Admin")]
         [HttpDelete("{lessonId}")]
 
         public async Task<IActionResult> DeleteLesson(int lessonId)
@@ -185,7 +200,7 @@ namespace ELearningPlatform.Api.Controllers
                 return NotFound("Lesson not found");
             }
 
-            if (lesson.Course!.InstructorId == instructorId)
+            if (!User.IsInRole("Admin") && lesson.Course!.InstructorId != instructorId)
             {
                 return Forbid();
             }

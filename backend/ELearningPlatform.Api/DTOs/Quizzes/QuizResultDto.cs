@@ -8,6 +8,10 @@
 
         public string QuizTitle { get; set; } = string.Empty;
 
+        public int CourseId { get; set; }
+
+        public string CourseTitle { get; set; } = string.Empty;
+
         public int Score { get; set; }
 
         public int TotalQuestions { get; set; }

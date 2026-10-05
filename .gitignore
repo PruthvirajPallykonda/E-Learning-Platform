@@ -1,0 +1,18 @@
+# Visual Studio / IDE
+.vs/
+.vscode/
+*.user
+*.suo
+
+# .NET Build artifacts
+[Bb]in/
+[Oo]bj/
+
+# Node / React
+node_modules/
+dist/
+build/
+
+# Environment files
+.env
+.env.local

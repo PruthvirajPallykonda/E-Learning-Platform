@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCourses } from "./courseSlice";
 import { Link } from "react-router-dom";
+import BackButton from "../../components/BackButton";
 
 const defaultCourses = [
     {
@@ -58,7 +59,7 @@ const defaultCourses = [
         id: "sample-fullstack",
         title: "Full Stack Project Bootcamp",
         description: "Connect React, APIs, authentication, database models, and deployment basics.",
-        instructorName: "Demo Instructor",
+        instructorName: "Shanakar Instructor",
         price: 1499,
         categoryName: "Web Development",
         lessonCount: 12,
@@ -79,6 +80,7 @@ function CourseList() {
 
   return (
     <div className="courses-page container mt-4">
+        <BackButton fallback="/" />
         <div className="section-header">
             <span className="eyebrow">Course catalog</span>
             <h2>Courses</h2>

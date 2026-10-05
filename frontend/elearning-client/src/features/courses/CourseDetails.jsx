@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourseById, enrollCourse, fetchMyCourses, clearEnrollmentMessage } from './courseSlice'
 import { Link, useParams } from 'react-router-dom'
 import QuizList from "../quizzes/QuizList";
+import BackButton from '../../components/BackButton';
 
 function CourseDetails() {
 
@@ -35,6 +36,7 @@ function CourseDetails() {
 
   return (
     <div className='container mt-4 course-detail-page'>
+        <BackButton fallback="/courses" />
         <span className='eyebrow'>Course details</span>
         <h2>{selectedCourse.title}</h2>
         <p>{selectedCourse.description}</p>

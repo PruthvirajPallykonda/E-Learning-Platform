@@ -68,7 +68,29 @@ public class EnrollmentsController : ControllerBase
                 CourseId = e.CourseId,
                 CourseTitle = e.Course!.Title,
                 InstructorName = e.Course.Instructor!.FullName,
-                EnrolledAt = e.EnrolledAt
+                EnrolledAt = e.EnrolledAt,
+
+                TotalLessons = e.Course.Lessons.Count(),
+
+                CompletedLessons = e.Course.Lessons.Count(l =>
+                    l.LessonProgresses.Any(lp =>
+                        lp.UserId == userId &&
+                        lp.IsCompleted
+                    )
+                ),
+
+                ProgressPercentage = e.Course.Lessons.Count() == 0
+                    ? 0
+                    : Math.Round(
+                        (double)e.Course.Lessons.Count(l =>
+                            l.LessonProgresses.Any(lp =>
+                                lp.UserId == userId &&
+                                lp.IsCompleted
+                            )
+                        )
+                        / e.Course.Lessons.Count() * 100,
+                        2
+                    )
             })
             .ToListAsync();
 

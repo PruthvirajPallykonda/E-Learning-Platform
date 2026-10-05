@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMyCourses } from "../features/courses/courseSlice";
 import { Link } from "react-router-dom";
 import MyQuizResults from "../features/quizzes/MyQuizResults";
+import { fetchMyQuizResults } from "../features/quizzes/quizSlice";
 
 function StudentDashboard() {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ function StudentDashboard() {
 
   useEffect(() => {
     dispatch(fetchMyCourses());
+    dispatch(fetchMyQuizResults());
   }, [dispatch]);
 
   return (
@@ -31,13 +33,13 @@ function StudentDashboard() {
                   {new Date(item.enrolledAt).toLocaleDateString()}
                 </p>
 
-                <Link
-                  to={`/courses/${item.courseId}`}
-                  className="btn btn-primary"
-                >
-                  Continue Learning
+                <Link to={`/courses/${item.courseId}`} className="btn btn-primary">
+                  {item.totalLessons > 0 &&
+                  item.completedLessons === item.totalLessons
+                    ? "Watch Again"
+                    : "Continue Learning"}
                 </Link>
-                <MyQuizResults />
+                <MyQuizResults courseId={item.courseId} />
               </div>
             </div>
           </div>

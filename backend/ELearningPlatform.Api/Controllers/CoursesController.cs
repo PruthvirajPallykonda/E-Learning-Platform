@@ -77,12 +77,27 @@ namespace ELearningPlatform.Api.Controllers
             return Ok(course);
         }
 
-        [Authorize(Roles = "Instructor")]
+        [Authorize(Roles = "Instructor,Admin")]
         [HttpPost]
 
         public async Task<ActionResult<CourseListDto>> CreateCourse(CourseCreateDto request)
         {
             var instructorId = GetCurrentUserId();
+
+            if (string.IsNullOrWhiteSpace(request.Title))
+            {
+                return BadRequest("Course title is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.Description))
+            {
+                return BadRequest("Course description is required.");
+            }
+
+            if (request.Price < 0)
+            {
+                return BadRequest("Course price cannot be negative.");
+            }
 
             var categoryExists = await _context.Categories
                 .AnyAsync(c => c.Id == request.CategoryId);
@@ -115,7 +130,7 @@ namespace ELearningPlatform.Api.Controllers
             });
         }
 
-        [Authorize(Roles = "Instructor")]
+        [Authorize(Roles = "Instructor,Admin")]
         [HttpPut("{id}")]
         
         public async Task<IActionResult> UpdateCourse(int id, CourseUpdateDto request)
@@ -130,7 +145,7 @@ namespace ELearningPlatform.Api.Controllers
                 return NotFound("Course not found");
             }
 
-            if (course.InstructorId != instructorId)
+            if (!User.IsInRole("Admin") && course.InstructorId != instructorId)
             {
                 return Forbid();
             }
@@ -154,7 +169,7 @@ namespace ELearningPlatform.Api.Controllers
             return NoContent();
         }
 
-        [Authorize(Roles = "Instructor")]
+        [Authorize(Roles = "Instructor,Admin")]
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> DeleteCourse(int id)
@@ -168,7 +183,7 @@ namespace ELearningPlatform.Api.Controllers
             {
                 return NotFound("Course not found");
             }
-            if(course.InstructorId != instructorId)
+            if(!User.IsInRole("Admin") && course.InstructorId != instructorId)
             {
                 return Forbid();
             }
@@ -178,6 +193,50 @@ namespace ELearningPlatform.Api.Controllers
 
             return NoContent();
         }
+
+
+        [Authorize(Roles = "Instructor,Admin")]
+        [HttpGet("my-courses")]
+        public async Task<ActionResult<List<InstructorCourseDto>>> GetMyCourses()
+        {
+            var instructorId = GetCurrentUserId();
+            var isAdmin = User.IsInRole("Admin");
+
+            var courses = await _context.Courses
+                .Where(c => isAdmin || c.InstructorId == instructorId)
+                .OrderByDescending(c => c.CreatedAt)
+                .Select(c => new InstructorCourseDto
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Description = c.Description,
+                    Price = c.Price,
+                    CreatedAt = c.CreatedAt,
+
+                    Lessons = c.Lessons
+                        .OrderBy(l => l.OrderNumber)
+                        .Select(l => new InstructorLessonDto
+                        {
+                            Id = l.Id,
+                            Title = l.Title,
+                            OrderNumber = l.OrderNumber
+                        })
+                        .ToList(),
+
+                    Quizzes = c.Quizzes
+                        .Select(q => new InstructorQuizDto
+                        {
+                            Id = q.Id,
+                            Title = q.Title,
+                            QuestionCount = q.Questions.Count()
+                        })
+                        .ToList()
+                })
+                .ToListAsync();
+
+            return Ok(courses);
+        }
+
 
         private int GetCurrentUserId()
         {

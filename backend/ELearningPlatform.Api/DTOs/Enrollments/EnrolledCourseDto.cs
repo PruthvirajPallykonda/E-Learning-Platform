@@ -11,5 +11,11 @@
         public string InstructorName { get; set; } = string.Empty;
 
         public DateTime EnrolledAt { get; set; }
+
+        public int TotalLessons { get; set; }
+
+        public int CompletedLessons { get; set; }
+
+        public double ProgressPercentage { get; set; }
     }
 }

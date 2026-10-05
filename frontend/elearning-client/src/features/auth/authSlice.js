@@ -1,8 +1,6 @@
 ﻿import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { loginApi, registerApi } from "../../api/authApi";
 
-const savedUser = JSON.parse(localStorage.getItem("user"));
-
 const getErrorMessage = (error, fallback) => {
     const message = error.response?.data;
 
@@ -46,13 +44,14 @@ export const register = createAsyncThunk("auth/register", async (data, { rejectW
 const authSlice = createSlice({
     name: "auth",
     initialState: {
-        user: savedUser || null,
+        user: null,
         loading: false,
         error: null
     },
     reducers: {
         logout: (state) => {
             state.user = null;
+            sessionStorage.removeItem("user");
             localStorage.removeItem("user");
         },
     },
@@ -66,7 +65,7 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.user = action.payload;
                 state.error = null;
-                localStorage.setItem("user", JSON.stringify(action.payload));
+                sessionStorage.setItem("user", JSON.stringify(action.payload));
             })
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
@@ -76,11 +75,11 @@ const authSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(register.fulfilled, (state, action) => {
+            .addCase(register.fulfilled, (state) => {
                 state.loading = false;
-                state.user = action.payload;
+                state.user = null;
                 state.error = null;
-                localStorage.setItem("user", JSON.stringify(action.payload));
+                sessionStorage.removeItem("user");
             })
             .addCase(register.rejected, (state, action) => {
                 state.loading = false;

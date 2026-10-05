@@ -2,6 +2,7 @@ import {useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchQuizById, submitQuiz, clearLatestResult } from './quizSlice'
 import { useParams } from 'react-router-dom'
+import BackButton from '../../components/BackButton';
 
 function QuizPage() {
     const { quizId } =  useParams();
@@ -45,6 +46,7 @@ function QuizPage() {
 
   return (
     <div className='container mt-4'>
+        <BackButton fallback={`/courses/${selectedQuiz.courseId}`} />
         <h2>{selectedQuiz.title}</h2>
         <p>Course: {selectedQuiz.courseTitle}</p>
 

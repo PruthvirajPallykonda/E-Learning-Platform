@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\E-learning-Platform\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D6D37D10-D851-C350-5BE6-052CD2EFB317}|ELearningPlatform.Api\\ELearningPlatform.Api.csproj|d:\\e-learning-platform\\backend\\elearningplatform.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D6D37D10-D851-C350-5BE6-052CD2EFB317}|ELearningPlatform.Api\\ELearningPlatform.Api.csproj|solutionrelative:elearningplatform.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D6D37D10-D851-C350-5BE6-052CD2EFB317}|ELearningPlatform.Api\\ELearningPlatform.Api.csproj|d:\\e-learning-platform\\backend\\elearningplatform.api\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6D37D10-D851-C350-5BE6-052CD2EFB317}|ELearningPlatform.Api\\ELearningPlatform.Api.csproj|solutionrelative:elearningplatform.api\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D6D37D10-D851-C350-5BE6-052CD2EFB317}|ELearningPlatform.Api\\ELearningPlatform.Api.csproj|d:\\e-learning-platform\\backend\\elearningplatform.api\\controllers\\quizzescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D6D37D10-D851-C350-5BE6-052CD2EFB317}|ELearningPlatform.Api\\ELearningPlatform.Api.csproj|solutionrelative:elearningplatform.api\\controllers\\quizzescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6D37D10-D851-C350-5BE6-052CD2EFB317}|ELearningPlatform.Api\\ELearningPlatform.Api.csproj|d:\\e-learning-platform\\backend\\elearningplatform.api\\controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6D37D10-D851-C350-5BE6-052CD2EFB317}|ELearningPlatform.Api\\ELearningPlatform.Api.csproj|solutionrelative:elearningplatform.api\\controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,21 +22,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\E-learning-Platform\\backend\\ELearningPlatform.Api\\Program.cs",
-              "RelativeDocumentMoniker": "ELearningPlatform.Api\\Program.cs",
-              "ToolTip": "D:\\E-learning-Platform\\backend\\ELearningPlatform.Api\\Program.cs",
-              "RelativeToolTip": "ELearningPlatform.Api\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-01T12:47:33.492Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
@@ -42,9 +36,34 @@
               "RelativeDocumentMoniker": "ELearningPlatform.Api\\Controllers\\QuizzesController.cs",
               "ToolTip": "D:\\E-learning-Platform\\backend\\ELearningPlatform.Api\\Controllers\\QuizzesController.cs",
               "RelativeToolTip": "ELearningPlatform.Api\\Controllers\\QuizzesController.cs",
-              "ViewState": "AgIAAP4AAAAAvpmZmZkdwBABAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAOoAAAAAQJuZmZnZv/AAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-03T08:55:23.101Z"
+              "WhenOpened": "2026-10-04T12:29:23.002Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LessonController.cs",
+              "DocumentMoniker": "D:\\E-learning-Platform\\backend\\ELearningPlatform.Api\\Controllers\\LessonController.cs",
+              "RelativeDocumentMoniker": "ELearningPlatform.Api\\Controllers\\LessonController.cs",
+              "ToolTip": "D:\\E-learning-Platform\\backend\\ELearningPlatform.Api\\Controllers\\LessonController.cs",
+              "RelativeToolTip": "ELearningPlatform.Api\\Controllers\\LessonController.cs",
+              "ViewState": "AgIAAJwAAAAA4Lu7O5/0v7oAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-04T12:27:51.114Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CoursesController.cs",
+              "DocumentMoniker": "D:\\E-learning-Platform\\backend\\ELearningPlatform.Api\\Controllers\\CoursesController.cs",
+              "RelativeDocumentMoniker": "ELearningPlatform.Api\\Controllers\\CoursesController.cs",
+              "ToolTip": "D:\\E-learning-Platform\\backend\\ELearningPlatform.Api\\Controllers\\CoursesController.cs",
+              "RelativeToolTip": "ELearningPlatform.Api\\Controllers\\CoursesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-04T12:27:23.835Z",
+              "EditorCaption": ""
             }
           ]
         }
